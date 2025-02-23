@@ -1,0 +1,13 @@
+unordered_map<int, int> hashMap; // To store the value and its index
+
+    for (int i = 0; i < nums.size(); ++i) {
+        int complement = target - nums[i]; // Calculate the complement
+
+        // Check if the complement exists in the hash map
+        if (hashMap.find(complement) != hashMap.end()) {
+            return {hashMap[complement], i}; // Return indices of the complement and current number
+        }
+
+        // Store the current number and its index in the hash map
+        hashMap[nums[i]] = i;
+    }
