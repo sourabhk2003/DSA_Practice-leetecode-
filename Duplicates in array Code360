@@ -1,12 +1,26 @@
 int findDuplicate(vector<int> &arr) 
 {
-    // Write your code here
+    // Initialize variable to store the XOR result
     int ans = 0;
-    for(int i = 0; i<arr.size(); i++) {
-        ans = ans^arr[i];
+
+    // First loop: XOR all elements in the array
+    // After this loop:
+    // ans = arr[0] ⊕ arr[1] ⊕ ... ⊕ arr[n]
+    for (int i = 0; i < arr.size(); i++) {
+        ans = ans ^ arr[i];
     }
-    for (int i = 0; i<arr.size(); i++) {
-        ans = ans^i;
+
+    // Second loop: XOR all integers from 1 to n
+    // After this loop:
+    // ans = (arr[0] ⊕ arr[1] ⊕ ... ⊕ arr[n]) ⊕ (1 ⊕ 2 ⊕ ... ⊕ n)
+    for (int i = 0; i < arr.size(); i++) {
+        ans = ans ^ i;
     }
-	return ans;
+
+    // Why this works:
+    // - All numbers from 1 to n cancel out because they appear once in both the array and the range [1, n].
+    // - The duplicate number does not fully cancel out because it appears twice in the array.
+    // - Hence, ans will contain the duplicate number.
+
+    return ans; // The duplicate number
 }
